@@ -1,4 +1,4 @@
-# Berlin Robocars Team Equis
+# Berlin Robocars Team KJM
 Forked and synced on April 26
 
 
