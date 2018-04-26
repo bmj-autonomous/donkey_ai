@@ -3,7 +3,10 @@ Team name:
 
 Forked and synced on April 26
 
-Labels:
+Feature Labels:
+* **Experiment** Treat this as an experiment - document hypothesis and findings
+
+Category Labels:
 * **GCP** Integrating platform with cloud storage and training
 * **Code optimization** Small changes to code base for improved useability 
 * **Computer Vision** Improving the CV system
