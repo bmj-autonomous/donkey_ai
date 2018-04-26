@@ -1,3 +1,8 @@
+# Berlin Robocars Team KJM
+Team name: 
+
+Forked and synced on April 26
+
 # donkeycar: a python self driving library 
 
 ![build status](https://travis-ci.org/wroscoe/donkey.svg?branch=master)
