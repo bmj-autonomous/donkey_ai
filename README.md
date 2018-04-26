@@ -4,10 +4,10 @@ Team name:
 Forked and synced on April 26
 
 Labels:
-* GCP
-          * asdf
-* Code optimization
-* 
+* **GCP** Integrating platform with cloud storage and training
+* **Code optimization** Small changes to code base for improved useability 
+* **Computer Vision** Improving the CV system
+* **CI/CD** Automating the synchronization of code between RPi and host repo, collaboration, etc.
 
 # donkeycar: a python self driving library 
 
