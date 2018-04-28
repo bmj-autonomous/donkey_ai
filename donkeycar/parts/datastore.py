@@ -204,7 +204,7 @@ class Tub(object):
         def get_file_ix(file_name):
             try:
                 name = file_name.split('.')[0]
-                num = int(name.split('_')[1])
+                num = int(name.split('_')[1].lstrip('0'))
             except:
                 num = 0
             return num
@@ -330,7 +330,8 @@ class Tub(object):
 
 
     def get_json_record_path(self, ix):
-        return os.path.join(self.path, 'record_'+str(ix)+'.json')
+        filename = 'record_{:05d}.json'.format(ix)
+        return os.path.join(self.path, filename)
 
     def get_json_record(self, ix):
         path = self.get_json_record_path(ix)
@@ -374,8 +375,8 @@ class Tub(object):
 
 
     def make_file_name(self, key, ext='.png'):
-        name = '_'.join([str(self.current_ix), key, ext])
-        name = name = name.replace('/', '-')
+        name = '{:05d}_{}{}'.format(self.current_ix, key, ext)
+        name = name.replace('/', '-')
         return name
 
     def delete(self):
