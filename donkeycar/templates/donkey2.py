@@ -25,6 +25,8 @@ from donkeycar.parts.datastore import TubHandler, TubGroup
 from donkeycar.parts.controller import LocalWebController, JoystickController
 
 
+raise
+
 
 def drive(cfg, model_path=None, use_joystick=False):
     '''

@@ -16,8 +16,13 @@ import os
 import numpy as np
 import keras
 
-import donkeycar as dk
+# MJ - Assertions added, no more version mismatches!
+assert keras.__version__ == '2.0.6', "Need keras==2.0.6"
+import tensorflow as tf 
+#print(tf.__version__)
+assert tf.__version__ == '1.3.0', "Need tensorflow==1.3.0"
 
+import donkeycar as dk
 
 class KerasPilot():
  

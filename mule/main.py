@@ -43,20 +43,14 @@ logger.debug(f"Logging by {path_logging_conf}")
 #===============================================================================
 import os
 from docopt import docopt
+import warnings
 
 #===============================================================================
 #--- SETUP custom modules
 #===============================================================================
-#logger.propagate = False
-#logger.setLevel('INFO') 
-#logger.debug(f"TEST")
-
 import my_utilities as util
-#raise
 
-# Suppress warnings! 
-import warnings
-with warnings.catch_warnings():
+with warnings.catch_warnings(): # Suppress warnings!
     warnings.simplefilter("ignore")
     # Disable logging messages from tf - matplotlib (
     #TODO: Better way??
