@@ -11,15 +11,13 @@ import logging.config
 import yaml as yaml
 import os 
 
+# Get the config file
 path_logging_conf = os.path.join(os.getcwd(),'logging_config', 'loggingSimpleYaml.yaml')
 print(path_logging_conf)
 assert os.path.exists(path_logging_conf)
-
-#logger = logging.getLogger(__name__)
 log_config = yaml.load(open(path_logging_conf, 'r'))
 logging.config.dictConfig(log_config)
 logging.debug(f"Logging by {path_logging_conf}")
-
 
 #===============================================================================
 #--- SETUP standard modules
