@@ -207,7 +207,7 @@ if __name__ == '__main__':
     args = docopt(__doc__)
     logging.debug(f"Args: {args}")
     
-    cfg = dk.load_config()
+    cfg = util.load_config()
     
     util.check_versions()
     util.list_path()

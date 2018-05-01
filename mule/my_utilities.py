@@ -6,6 +6,27 @@ import logging
 
 #warnings.filterwarnings("default")
 
+def load_config(config_path):
+
+    '''
+    load a config from the given path
+    '''
+    conf = os.path.expanduser(config_path)
+
+    if not os.path.exists(conf):
+        print("No config file at location: %s. Add --config to specify\
+                location or run from dir containing config.py." % conf)
+        return None
+
+    try:
+        cfg = dk.load_config(conf)
+    except:
+        print("Exception while loading config from", conf)
+        return None
+
+    return cfg
+
+
 
 def check_versions():
     pass
