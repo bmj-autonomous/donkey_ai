@@ -1,19 +1,3 @@
-""" 
-CAR CONFIG 
-
-This file is read by your car application's manage.py script to change the car
-performance. 
-
-EXMAPLE
------------
-import dk
-cfg = dk.load_config(config_path='~/d2/config.py')
-print(cfg.CAMERA_RESOLUTION)
-
-"""
-
-
-import os
 
 #PATHS
 CAR_PATH = PACKAGE_PATH = os.path.dirname(os.path.realpath(__file__))

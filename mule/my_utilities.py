@@ -1,4 +1,4 @@
-# import logging
+import logging
 # logger = logging.getLogger(__name__)
 # 
 # logger.setLevel("INFO")
@@ -7,21 +7,29 @@
 #import tensorflow as tf
 #from tensorflow.python import pywrap_tensorflow
 import re
-#import logging
+import os
+import importlib
 import yaml as yaml
-
+import pprint
 #warnings.filterwarnings("default")
 
 
 def load_config_yaml(path_config):
     config = yaml.load(open(path_config, 'r'))
     logging.debug(f"Loaded config file {path_config}")
+    print("******")
+    pprint.pprint(config)
+    print("******")
+    assert config['CAMERA']['CAMERA_FRAMERATE'] == config['VEHICLE']['DRIVE_LOOP_HZ']
+    
     return config
 
 
 
 def check_versions():
-    pass
+    #print(importlib.util.find_spec("keras"))
+    raise
+    
 
 def list_path():
     try:

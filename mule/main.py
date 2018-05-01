@@ -38,7 +38,6 @@ logger.setLevel('DEBUG')
 
 logger.debug(f"Logging by {path_logging_conf}")
 
-
 #===============================================================================
 #--- SETUP standard modules
 #===============================================================================
@@ -55,23 +54,27 @@ from docopt import docopt
 import my_utilities as util
 #raise
 
-
-import donkeycar as dk
-
-#import parts
-from donkeycar.parts.camera import PiCamera
-from donkeycar.parts.transform import Lambda
-
-# Disable logging messages from tf - matplotlib (
-#TODO: Better way??
-logging.getLogger("matplotlib").setLevel(logging.WARNING)
-from donkeycar.parts.keras import KerasCategorical
-logging.getLogger("matplotlib").setLevel(logging.DEBUG)
-
-from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
-from donkeycar.parts.datastore import TubHandler, TubGroup
-from donkeycar.parts.controller import LocalWebController, JoystickController
-
+# Suppress warnings! 
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    # Disable logging messages from tf - matplotlib (
+    #TODO: Better way??
+    logging.getLogger("matplotlib").setLevel(logging.WARNING)
+    
+    # Main package
+    import donkeycar as dk
+    
+    #import parts
+    from donkeycar.parts.camera import PiCamera
+    from donkeycar.parts.transform import Lambda
+    
+    from donkeycar.parts.keras import KerasCategorical
+    #logging.getLogger("matplotlib").setLevel(logging.DEBUG)
+    
+    from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
+    from donkeycar.parts.datastore import TubHandler, TubGroup
+    from donkeycar.parts.controller import LocalWebController, JoystickController
 
 #===============================================================================
 #--- Main script
@@ -89,7 +92,7 @@ def drive(cfg, model_path=None, use_joystick=False):
     to parts requesting the same named input.
     '''
 
-    #Initialize car
+    #--- Initialize car
     V = dk.vehicle.Vehicle()
     cam = PiCamera(resolution=cfg.CAMERA_RESOLUTION)
     V.add(cam, outputs=['cam/image_array'], threaded=True)
@@ -132,7 +135,7 @@ def drive(cfg, model_path=None, use_joystick=False):
           run_condition='run_pilot')
     
     
-    #Choose what inputs should change the car.
+    #--- Choose what inputs should change the car.
     def drive_mode(mode, 
                    user_angle, user_throttle,
                    pilot_angle, pilot_throttle):
@@ -166,7 +169,7 @@ def drive(cfg, model_path=None, use_joystick=False):
     V.add(steering, inputs=['angle'])
     V.add(throttle, inputs=['throttle'])
     
-    #add tub to save data
+    #--- add tub to save data
     inputs=['cam/image_array', 'user/angle', 'user/throttle', 'user/mode']
     types=['image_array', 'float', 'float',  'str']
     
@@ -174,7 +177,7 @@ def drive(cfg, model_path=None, use_joystick=False):
     tub = th.new_tub_writer(inputs=inputs, types=types)
     V.add(tub, inputs=inputs, run_condition='recording')
     
-    #run the vehicle
+    #--- run the vehicle
     V.start(rate_hz=cfg.DRIVE_LOOP_HZ, 
             max_loop_count=cfg.MAX_LOOPS)
     
@@ -218,23 +221,26 @@ def train(cfg, tub_names, model_name):
              train_split=cfg.TRAIN_TEST_SPLIT)
 
 
-
-
-
 if __name__ == '__main__':
-    # command line arguments parser
+    #--- command line arguments parser
     args = docopt(__doc__)
-    args_line = " ".join(args.items())
-    logging.debug(f"Args: {args_line}")
+    print("******")
+    print("Arguments passed to script:")
+    for arg in args:
+        print("{:>10} = {:<10}".format(str(arg),str(args[arg])))
+    print("******")
+
     
-    # Load configuration
+    #--- Load configuration yaml
     path_config = r"./configurations/mjbase1.yaml"
     assert os.path.exists(path_config)
     cfg = util.load_config_yaml(path_config)
     
-    # Check that loaded package versions are aligned
+
+    #--- Check that loaded package versions are aligned
     util.check_versions()
     
+    raise
     # 
     util.list_path()
     
