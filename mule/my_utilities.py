@@ -25,12 +25,6 @@ def load_config_yaml(path_config):
     return config
 
 
-
-def check_versions():
-    #print(importlib.util.find_spec("keras"))
-    raise
-    
-
 def list_path():
     try:
         user_paths = os.environ['PYTHONPATH'].split(os.pathsep)

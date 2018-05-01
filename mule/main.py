@@ -88,7 +88,7 @@ def drive(cfg, model_path=None, use_joystick=False):
 
     #--- Initialize car
     V = dk.vehicle.Vehicle()
-    cam = PiCamera(resolution=cfg.CAMERA_RESOLUTION)
+    cam = PiCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])
     V.add(cam, outputs=['cam/image_array'], threaded=True)
     
     if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
@@ -229,17 +229,8 @@ if __name__ == '__main__':
     path_config = r"./configurations/mjbase1.yaml"
     assert os.path.exists(path_config)
     cfg = util.load_config_yaml(path_config)
-    
 
-    #--- Check that loaded package versions are aligned
-    util.check_versions()
-    
-    raise
-    # 
-    util.list_path()
-    
-    
-    raise
+    #raise
     
     if args['drive']:
         drive(cfg, model_path = args['--model'], use_joystick=args['--js'])
