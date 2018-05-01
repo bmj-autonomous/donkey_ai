@@ -3,36 +3,35 @@
 180501 MJ - Copied from donkey2.py, refactor
 
 """
+
 #===============================================================================
 #--- SETUP Logging
 #===============================================================================
 import logging.config
-
 import yaml as yaml
-#from drive import my_utilities
-#print(ABSOLUTE_LOGGING_PATH)
-#log_config = yaml.load(open(ABSOLUTE_LOGGING_PATH, 'r'))
-#logging.config.dictConfig(log_config)
+import os 
 
-#my_logger = logging.getLogger()
-#my_logger.setLevel("DEBUG")
+path_logging_conf = os.path.join(os.getcwd(),'logging_config', 'loggingSimpleYaml.yaml')
+print(path_logging_conf)
+assert os.path.exists(path_logging_conf)
+
+#logger = logging.getLogger(__name__)
+log_config = yaml.load(open(path_logging_conf, 'r'))
+logging.config.dictConfig(log_config)
+logging.debug(f"Logging by {path_logging_conf}")
+
 
 #===============================================================================
 #--- SETUP standard modules
 #===============================================================================
-
-
 import os
 from docopt import docopt
 
+#===============================================================================
+#--- SETUP custom modules
+#===============================================================================
+import my_utilities as util
 import donkeycar as dk
-
-import os
-try:
-    user_paths = os.environ['PYTHONPATH'].split(os.pathsep)
-except KeyError:
-    user_paths = []
-for p in user_paths: print(p) 
 
 #import parts
 from donkeycar.parts.camera import PiCamera
@@ -42,7 +41,10 @@ from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
 from donkeycar.parts.datastore import TubHandler, TubGroup
 from donkeycar.parts.controller import LocalWebController, JoystickController
 
-raise
+#===============================================================================
+#--- Main script
+#===============================================================================
+
 
 def drive(cfg, model_path=None, use_joystick=False):
     '''
@@ -190,6 +192,12 @@ def train(cfg, tub_names, model_name):
 if __name__ == '__main__':
     args = docopt(__doc__)
     cfg = dk.load_config()
+    
+    util.check_versions()
+    util.list_path()
+    
+    logging.debug(f"Args: {args}")
+    raise
     
     if args['drive']:
         drive(cfg, model_path = args['--model'], use_joystick=args['--js'])

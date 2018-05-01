@@ -7,6 +7,18 @@ import logging
 #warnings.filterwarnings("default")
 
 
+def check_versions():
+    pass
+
+def list_path():
+    try:
+        user_paths = os.environ['PYTHONPATH'].split(os.pathsep)
+    except KeyError:
+        user_paths = []
+    for p in user_paths: print(p) 
+
+
+
 def print_tensor_devices():
     devices_listing = device_lib.list_local_devices()
     
