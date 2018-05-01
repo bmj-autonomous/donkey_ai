@@ -1,21 +1,39 @@
 #!/usr/bin/env python3
 """
-Scripts to drive a donkey 2 car and train a model for it. 
+180501 MJ - Copied from donkey2.py, refactor
 
-Usage:
-    manage.py (drive) [--model=<model>] [--js]
-    manage.py (train) [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
-
-Options:
-    -h --help        Show this screen.
-    --tub TUBPATHS   List of paths to tubs. Comma separated. Use quotes to use wildcards. ie "~/tubs/*"
-    --js             Use physical joystick.
 """
+#===============================================================================
+#--- SETUP Logging
+#===============================================================================
+import logging.config
+
+import yaml as yaml
+#from drive import my_utilities
+#print(ABSOLUTE_LOGGING_PATH)
+#log_config = yaml.load(open(ABSOLUTE_LOGGING_PATH, 'r'))
+#logging.config.dictConfig(log_config)
+
+#my_logger = logging.getLogger()
+#my_logger.setLevel("DEBUG")
+
+#===============================================================================
+#--- SETUP standard modules
+#===============================================================================
+
+
 import os
 from docopt import docopt
 
 import donkeycar as dk
-raise
+
+import os
+try:
+    user_paths = os.environ['PYTHONPATH'].split(os.pathsep)
+except KeyError:
+    user_paths = []
+for p in user_paths: print(p) 
+
 #import parts
 from donkeycar.parts.camera import PiCamera
 from donkeycar.parts.transform import Lambda
@@ -24,7 +42,7 @@ from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
 from donkeycar.parts.datastore import TubHandler, TubGroup
 from donkeycar.parts.controller import LocalWebController, JoystickController
 
-
+raise
 
 def drive(cfg, model_path=None, use_joystick=False):
     '''
