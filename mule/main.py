@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
 """
+THIS IS FOR docopt 
+Scripts to drive a donkey 2 car and train a model for it. 
+
+Usage:
+    manage.py (drive) [--model=<model>] [--js]
+    manage.py (train) [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
+
+Options:
+    -h --help        Show this screen.
+    --tub TUBPATHS   List of paths to tubs. Comma separated. Use quotes to use wildcards. ie "~/tubs/*"
+    --js             Use physical joystick.
+"""
+
+
+"""
 180501 MJ - Copied from donkey2.py, refactor
 
 """
@@ -188,13 +203,16 @@ def train(cfg, tub_names, model_name):
 
 
 if __name__ == '__main__':
+    # command line arguments parser
     args = docopt(__doc__)
+    logging.debug(f"Args: {args}")
+    
     cfg = dk.load_config()
     
     util.check_versions()
     util.list_path()
     
-    logging.debug(f"Args: {args}")
+    
     raise
     
     if args['drive']:
