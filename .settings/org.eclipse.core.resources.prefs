@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//donkeycar/config.py=utf-8
 encoding//donkeycar/memory.py=utf-8
 encoding//donkeycar/templates/square.py=utf-8
 encoding//donkeycar/templates/tk1.py=utf-8

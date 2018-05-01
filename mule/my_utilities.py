@@ -1,30 +1,22 @@
-from tensorflow.python.client import device_lib
+# import logging
+# logger = logging.getLogger(__name__)
+# 
+# logger.setLevel("INFO")
+
+#
 #import tensorflow as tf
 #from tensorflow.python import pywrap_tensorflow
 import re
-import logging
+#import logging
+import yaml as yaml
 
 #warnings.filterwarnings("default")
 
-def load_config(config_path):
 
-    '''
-    load a config from the given path
-    '''
-    conf = os.path.expanduser(config_path)
-
-    if not os.path.exists(conf):
-        print("No config file at location: %s. Add --config to specify\
-                location or run from dir containing config.py." % conf)
-        return None
-
-    try:
-        cfg = dk.load_config(conf)
-    except:
-        print("Exception while loading config from", conf)
-        return None
-
-    return cfg
+def load_config_yaml(path_config):
+    config = yaml.load(open(path_config, 'r'))
+    logging.debug(f"Loaded config file {path_config}")
+    return config
 
 
 
@@ -41,6 +33,10 @@ def list_path():
 
 
 def print_tensor_devices():
+    
+    from tensorflow.python.client import device_lib
+    
+    
     devices_listing = device_lib.list_local_devices()
     
     devices = list()

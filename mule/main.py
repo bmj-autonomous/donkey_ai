@@ -32,7 +32,12 @@ print(path_logging_conf)
 assert os.path.exists(path_logging_conf)
 log_config = yaml.load(open(path_logging_conf, 'r'))
 logging.config.dictConfig(log_config)
-logging.debug(f"Logging by {path_logging_conf}")
+
+logger = logging.getLogger(__name__)
+logger.setLevel('DEBUG') 
+
+logger.debug(f"Logging by {path_logging_conf}")
+
 
 #===============================================================================
 #--- SETUP standard modules
@@ -43,16 +48,30 @@ from docopt import docopt
 #===============================================================================
 #--- SETUP custom modules
 #===============================================================================
+#logger.propagate = False
+#logger.setLevel('INFO') 
+#logger.debug(f"TEST")
+
 import my_utilities as util
+#raise
+
+
 import donkeycar as dk
 
 #import parts
 from donkeycar.parts.camera import PiCamera
 from donkeycar.parts.transform import Lambda
+
+# Disable logging messages from tf - matplotlib (
+#TODO: Better way??
+logging.getLogger("matplotlib").setLevel(logging.WARNING)
 from donkeycar.parts.keras import KerasCategorical
+logging.getLogger("matplotlib").setLevel(logging.DEBUG)
+
 from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
 from donkeycar.parts.datastore import TubHandler, TubGroup
 from donkeycar.parts.controller import LocalWebController, JoystickController
+
 
 #===============================================================================
 #--- Main script
@@ -205,11 +224,18 @@ def train(cfg, tub_names, model_name):
 if __name__ == '__main__':
     # command line arguments parser
     args = docopt(__doc__)
-    logging.debug(f"Args: {args}")
+    args_line = " ".join(args.items())
+    logging.debug(f"Args: {args_line}")
     
-    cfg = util.load_config()
+    # Load configuration
+    path_config = r"./configurations/mjbase1.yaml"
+    assert os.path.exists(path_config)
+    cfg = util.load_config_yaml(path_config)
     
+    # Check that loaded package versions are aligned
     util.check_versions()
+    
+    # 
     util.list_path()
     
     
