@@ -24,7 +24,7 @@ Options:
 #===============================================================================
 import logging.config
 import yaml as yaml
-import os 
+import os
 
 # Get the config file
 path_logging_conf = os.path.join(os.getcwd(),'logging_config', 'loggingSimpleYaml.yaml')
@@ -34,7 +34,7 @@ log_config = yaml.load(open(path_logging_conf, 'r'))
 logging.config.dictConfig(log_config)
 
 logger = logging.getLogger(__name__)
-logger.setLevel('DEBUG') 
+logger.setLevel('DEBUG')
 
 logger.debug(f"Logging by {path_logging_conf}")
 
