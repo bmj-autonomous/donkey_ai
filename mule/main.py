@@ -4,8 +4,8 @@ THIS IS FOR docopt
 Scripts to drive a donkey 2 car and train a model for it. 
 
 Usage:
-    manage.py (drive) (--config=<config>) [--model=<model>] [--js]
-    manage.py (train) (--config=<config>) [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
+    manage.py (drive) (--config=<config>) [--model=<model>] [--js] [--offline]
+    manage.py (train) (--config=<config>) [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache] [--offline]
 
 Options:
     -h --help        Show this screen.
@@ -226,7 +226,6 @@ if __name__ == '__main__':
             print("\t{:<10} = {:<10}".format(str(arg),str(args[arg])))
         else: # Command
             print("{:>10} = {:<10}".format(str(arg),str(args[arg])))
-    
     print("**************************")    
 
     
