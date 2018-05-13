@@ -4,8 +4,8 @@ THIS IS FOR docopt
 Scripts to drive a donkey 2 car and train a model for it. 
 
 Usage:
-    manage.py (drive) [--config=<config>] [--model=<model>] [--js]
-    manage.py (train) [--config=<config>] [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
+    manage.py (drive) (--config=<config>) [--model=<model>] [--js]
+    manage.py (train) (--config=<config>) [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
 
 Options:
     -h --help        Show this screen.
@@ -231,8 +231,8 @@ if __name__ == '__main__':
 
     
     #--- Load configuration yaml
-    path_config = r"./configurations/mjbase1.yaml"
-    assert os.path.exists(path_config)
+    path_config = args['--config']
+    assert os.path.exists(path_config), f"Configuration .yml not found at {path_config}"
     cfg = util.load_config_yaml(path_config)
 
     
