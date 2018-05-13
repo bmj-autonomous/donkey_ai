@@ -45,7 +45,7 @@ import re
 import os
 from docopt import docopt
 import warnings
-
+from pprint import pprint
 #===============================================================================
 #--- SETUP custom modules
 #===============================================================================
@@ -89,7 +89,11 @@ def drive(cfg, model_path=None, use_joystick=False):
 
     #--- Initialize car
     V = dk.vehicle.Vehicle()
+    print(cfg)
+    raise
     cam = PiCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])
+    
+    
     V.add(cam, outputs=['cam/image_array'], threaded=True)
     
     if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
@@ -221,6 +225,7 @@ if __name__ == '__main__':
     args = docopt(__doc__)
     print("*** Welcome to Mule DS ***")
     print("Arguments passed:")
+    pprint(args)
     for arg in args:
         if re.match(r"--",arg): # Option
             print("\t{:<10} = {:<10}".format(str(arg),str(args[arg])))
@@ -233,15 +238,17 @@ if __name__ == '__main__':
     path_config = args['--config']
     assert os.path.exists(path_config), f"Configuration .yml not found at {path_config}"
     cfg = util.load_config_yaml(path_config)
-
     
-    if args['drive']:
-        drive(cfg, model_path = args['--model'], use_joystick=args['--js'])
+    #--- Merge the args and the configuration dictionary into one
+    cfg = {**cfg, **args}
 
-    elif args['train']:
-        tub = args['--tub']
-        model = args['--model']
-        cache = not args['--no_cache']
+    if cfg['drive']:
+        drive(cfg, model_path = cfg['--model'], use_joystick=cfg['--js'])
+
+    elif cfg['train']:
+        tub = cfg['--tub']
+        model = cfg['--model']
+        cache = not cfg['--no_cache']
         train(cfg, tub, model)
 
 
