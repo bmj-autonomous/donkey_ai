@@ -89,10 +89,12 @@ def drive(cfg, model_path=None, use_joystick=False):
 
     #--- Initialize car
     V = dk.vehicle.Vehicle()
-    #print(cfg)
+
+    if cfg['args']['--offline']:
+        cam = dk.parts.camera.MockCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])   
+    else:
+        cam = PiCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])
     raise
-    cam = PiCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])
-    
     
     V.add(cam, outputs=['cam/image_array'], threaded=True)
     
