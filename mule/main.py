@@ -89,7 +89,7 @@ def drive(cfg, model_path=None, use_joystick=False):
 
     #--- Initialize car
     V = dk.vehicle.Vehicle()
-    print(cfg)
+    #print(cfg)
     raise
     cam = PiCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])
     
@@ -219,13 +219,11 @@ def train(cfg, tub_names, model_name):
              steps=steps_per_epoch,
              train_split=cfg.TRAIN_TEST_SPLIT)
 
-
 if __name__ == '__main__':
     #--- command line arguments parser
     args = docopt(__doc__)
     print("*** Welcome to Mule DS ***")
     print("Arguments passed:")
-    pprint(args)
     for arg in args:
         if re.match(r"--",arg): # Option
             print("\t{:<10} = {:<10}".format(str(arg),str(args[arg])))
@@ -240,15 +238,16 @@ if __name__ == '__main__':
     cfg = util.load_config_yaml(path_config)
     
     #--- Merge the args and the configuration dictionary into one
+    args = {'args':args}
     cfg = {**cfg, **args}
+    pprint(cfg)
+    if cfg['args']['drive']:
+        drive(cfg, model_path = cfg['args']['--model'], use_joystick=cfg['args']['--js'])
 
-    if cfg['drive']:
-        drive(cfg, model_path = cfg['--model'], use_joystick=cfg['--js'])
-
-    elif cfg['train']:
-        tub = cfg['--tub']
-        model = cfg['--model']
-        cache = not cfg['--no_cache']
+    elif cfg['args']['train']:
+        tub = cfg['args']['--tub']
+        model = cfg['args']['--model']
+        cache = not cfg['args']['--no_cache']
         train(cfg, tub, model)
 
 
