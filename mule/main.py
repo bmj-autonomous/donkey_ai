@@ -240,7 +240,7 @@ if __name__ == '__main__':
     #--- Merge the args and the configuration dictionary into one
     args = {'args':args}
     cfg = {**cfg, **args}
-    pprint(cfg)
+    #pprint(cfg)
     if cfg['args']['drive']:
         drive(cfg, model_path = cfg['args']['--model'], use_joystick=cfg['args']['--js'])
 
