@@ -4,8 +4,8 @@ THIS IS FOR docopt
 Scripts to drive a donkey 2 car and train a model for it. 
 
 Usage:
-    manage.py (drive) [--model=<model>] [--js]
-    manage.py (train) [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
+    manage.py (drive) [--config=<config>] [--model=<model>] [--js]
+    manage.py (train) [--config=<config>] [--tub=<tub1,tub2,..tubn>]  (--model=<model>) [--no_cache]
 
 Options:
     -h --help        Show this screen.
@@ -41,6 +41,7 @@ logger.debug(f"Logging by {path_logging_conf}")
 #===============================================================================
 #--- SETUP standard modules
 #===============================================================================
+import re
 import os
 from docopt import docopt
 import warnings
@@ -218,11 +219,15 @@ def train(cfg, tub_names, model_name):
 if __name__ == '__main__':
     #--- command line arguments parser
     args = docopt(__doc__)
-    print("******")
-    print("Arguments passed to script:")
+    print("*** Welcome to Mule DS ***")
+    print("Arguments passed:")
     for arg in args:
-        print("{:>10} = {:<10}".format(str(arg),str(args[arg])))
-    print("******")
+        if re.match(r"--",arg): # Option
+            print("\t{:<10} = {:<10}".format(str(arg),str(args[arg])))
+        else: # Command
+            print("{:>10} = {:<10}".format(str(arg),str(args[arg])))
+    
+    print("**************************")    
 
     
     #--- Load configuration yaml
@@ -230,7 +235,6 @@ if __name__ == '__main__':
     assert os.path.exists(path_config)
     cfg = util.load_config_yaml(path_config)
 
-    #raise
     
     if args['drive']:
         drive(cfg, model_path = args['--model'], use_joystick=args['--js'])

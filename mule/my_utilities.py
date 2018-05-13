@@ -17,9 +17,10 @@ import pprint
 def load_config_yaml(path_config):
     config = yaml.load(open(path_config, 'r'))
     logging.debug(f"Loaded config file {path_config}")
-    print("******")
+    print("*** CONFIG ***")
     pprint.pprint(config)
-    print("******")
+    print("**************")
+    
     assert config['CAMERA']['CAMERA_FRAMERATE'] == config['VEHICLE']['DRIVE_LOOP_HZ']
     
     return config
