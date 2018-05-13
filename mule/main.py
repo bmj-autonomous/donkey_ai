@@ -94,11 +94,11 @@ def drive(cfg, model_path=None, use_joystick=False):
         cam = dk.parts.camera.MockCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])   
     else:
         cam = PiCamera(resolution=cfg['CAMERA']['CAMERA_RESOLUTION'])
-    raise
+    
     
     V.add(cam, outputs=['cam/image_array'], threaded=True)
     
-    if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
+    if use_joystick or cfg['JOYSTICK']['USE_JOYSTICK_AS_DEFAULT']:
         #modify max_throttle closer to 1.0 to have more power
         #modify steering_scale lower than 1.0 to have less responsive steering
         ctr = JoystickController(max_throttle=cfg.JOYSTICK_MAX_THROTTLE,
@@ -154,18 +154,28 @@ def drive(cfg, model_path=None, use_joystick=False):
           inputs=['user/mode', 'user/angle', 'user/throttle',
                   'pilot/angle', 'pilot/throttle'], 
           outputs=['angle', 'throttle'])
+
+
+    if not cfg['args']['--offline']:
+        steering_controller = PCA9685(cfg['STEERING']['STEERING_CHANNEL'])
+    else:
+        steering_controller = dk.parts.actuator.MOCK_PCA9685()
+
     
-    
-    steering_controller = PCA9685(cfg.STEERING_CHANNEL)
     steering = PWMSteering(controller=steering_controller,
-                                    left_pulse=cfg.STEERING_LEFT_PWM, 
-                                    right_pulse=cfg.STEERING_RIGHT_PWM)
+                                    left_pulse=cfg['STEERING']['STEERING_LEFT_PWM'], 
+                                    right_pulse=cfg['STEERING']['STEERING_RIGHT_PWM'])
     
-    throttle_controller = PCA9685(cfg.THROTTLE_CHANNEL)
+    if not cfg['args']['--offline']:
+        throttle_controller = PCA9685(cfg['THROTTLE']['THROTTLE_CHANNEL'])
+    else:
+        throttle_controller = dk.parts.actuator.MOCK_PCA9685()
+    
+    
     throttle = PWMThrottle(controller=throttle_controller,
-                                    max_pulse=cfg.THROTTLE_FORWARD_PWM,
-                                    zero_pulse=cfg.THROTTLE_STOPPED_PWM, 
-                                    min_pulse=cfg.THROTTLE_REVERSE_PWM)
+                                    max_pulse=cfg['THROTTLE']['THROTTLE_FORWARD_PWM'],
+                                    zero_pulse=cfg['THROTTLE']['THROTTLE_STOPPED_PWM'], 
+                                    min_pulse=cfg['THROTTLE']['THROTTLE_REVERSE_PWM'])
     
     V.add(steering, inputs=['angle'])
     V.add(throttle, inputs=['throttle'])
