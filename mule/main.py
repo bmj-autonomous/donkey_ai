@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-THIS IS FOR docopt 
+THIS IS FOR docopt !!!
 Scripts to drive a donkey 2 car and train a model for it. 
 
 Usage:
