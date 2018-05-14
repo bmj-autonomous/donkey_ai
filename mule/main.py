@@ -184,13 +184,13 @@ def drive(cfg, model_path=None, use_joystick=False):
     inputs=['cam/image_array', 'user/angle', 'user/throttle', 'user/mode']
     types=['image_array', 'float', 'float',  'str']
     
-    th = TubHandler(path=cfg.DATA_PATH)
+    th = TubHandler(path=cfg['PATHS']['DATA_PATH'])
     tub = th.new_tub_writer(inputs=inputs, types=types)
     V.add(tub, inputs=inputs, run_condition='recording')
     
     #--- run the vehicle
-    V.start(rate_hz=cfg.DRIVE_LOOP_HZ, 
-            max_loop_count=cfg.MAX_LOOPS)
+    V.start(rate_hz=cfg['VEHICLE']['DRIVE_LOOP_HZ'], 
+            max_loop_count=cfg['VEHICLE']['MAX_LOOPS'])
     
     print("You can now go to <your pi ip address>:8887 to drive your car.")
 
@@ -248,7 +248,12 @@ if __name__ == '__main__':
     path_config = args['--config']
     assert os.path.exists(path_config), f"Configuration .yml not found at {path_config}"
     cfg = util.load_config_yaml(path_config)
-    
+    # Add paths
+    cfg['PATHS'] = dict()
+    cfg['PATHS']['CAR_PATH'] = os.getcwd()
+    cfg['PATHS']['DATA_PATH'] = os.path.join(cfg['PATHS']['CAR_PATH'],'data')
+    cfg['PATHS']['MODELS_PATH'] =  os.path.join(cfg['PATHS']['CAR_PATH'],'models')
+
     #--- Merge the args and the configuration dictionary into one
     args = {'args':args}
     cfg = {**cfg, **args}
