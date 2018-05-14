@@ -348,8 +348,6 @@ class Teensy:
 
         return ret
 
-
-
 class MockController(object):
     def __init__(self):
         self.channel = -1
