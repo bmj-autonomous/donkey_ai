@@ -52,21 +52,12 @@ class Vehicle():
 
         logging.info("Added part {}".format(entry['part'].__class__.__name__))
 
-        logging.debug("\tinputs={}".format(
-             entry['inputs'],
-             ))
-        logging.debug("\toutputs={}".format(
-             entry['outputs'],
-             ))
-        logging.debug("\trun_condition={}".format(
-             entry['run_condition'],
-             ))
-        logging.debug("\tthread={}".format(
-             entry['thread'],
-             ))                
+        logging.debug("\tinputs={}".format(entry['inputs'],             ))
+        logging.debug("\toutputs={}".format(entry['outputs'],))
+        logging.debug("\trun_condition={}".format(entry['run_condition'],))
+        logging.debug("\tthread={}".format(entry['thread'],))                
 
         self.parts.append(entry)
-
 
     def start(self, rate_hz=10, max_loop_count=None):
         """
@@ -97,7 +88,8 @@ class Vehicle():
                     entry.get('thread').start()
 
             #wait until the parts warm up.
-            print('Starting vehicle...')
+            logging.info("Starting vehicle at {} Hz ...".format(rate_hz))
+            
             time.sleep(1)
 
             loop_count = 0
@@ -148,10 +140,8 @@ class Vehicle():
                 if outputs is not None:
                     self.mem.put(entry['outputs'], outputs)
 
-                    
-
     def stop(self):
-        print('Shutting down vehicle and its parts...')
+        logging.info("Shutting down vehicle and its parts...".format())
         for entry in self.parts:
             try:
                 entry['part'].shutdown()

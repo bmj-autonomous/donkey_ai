@@ -73,3 +73,21 @@
 2018-05-14 17:09:22,587 - root - INFO - Added part PWMSteering
 2018-05-14 17:09:22,588 - root - INFO - Added part PWMThrottle
 2018-05-14 17:09:22,589 - root - INFO - Added part TubWriter
+2018-05-14 17:11:04,849 - root - INFO - Added part MockCamera
+2018-05-14 17:11:04,851 - root - INFO - Added part LocalWebController
+2018-05-14 17:11:04,851 - root - INFO - Added part Lambda
+2018-05-14 17:11:04,932 - root - INFO - Added part KerasCategorical
+2018-05-14 17:11:04,932 - root - INFO - Added part Lambda
+2018-05-14 17:11:05,934 - root - INFO - Added part PWMSteering
+2018-05-14 17:11:05,935 - root - INFO - Added part PWMThrottle
+2018-05-14 17:11:05,936 - root - INFO - Added part TubWriter
+2018-05-14 17:11:05,937 - root - INFO - Starting vehicle at 20 Hz ...
+2018-05-14 17:12:33,393 - root - INFO - Added part MockCamera
+2018-05-14 17:12:33,395 - root - INFO - Added part LocalWebController
+2018-05-14 17:12:33,395 - root - INFO - Added part Lambda
+2018-05-14 17:12:33,475 - root - INFO - Added part KerasCategorical
+2018-05-14 17:12:33,475 - root - INFO - Added part Lambda
+2018-05-14 17:12:34,477 - root - INFO - Added part PWMSteering
+2018-05-14 17:12:34,478 - root - INFO - Added part PWMThrottle
+2018-05-14 17:12:34,479 - root - INFO - Added part TubWriter
+2018-05-14 17:12:34,481 - root - INFO - Starting vehicle at 20 Hz ...
