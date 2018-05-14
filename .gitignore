@@ -12,4 +12,4 @@ lag_log.csv
 site/*
 build
 .idea
-org.eclipse.core.resources.prefs
+/.settings/
