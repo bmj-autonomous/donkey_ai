@@ -159,7 +159,7 @@ def drive(cfg, model_path=None, use_joystick=False):
     if not cfg['args']['--offline']:
         steering_controller = PCA9685(cfg['STEERING']['STEERING_CHANNEL'])
     else:
-        steering_controller = dk.parts.actuator.MOCK_PCA9685()
+        steering_controller = dk.parts.actuator.MOCK_PCA9685(cfg['STEERING']['STEERING_CHANNEL'])
 
     
     steering = PWMSteering(controller=steering_controller,
@@ -169,7 +169,7 @@ def drive(cfg, model_path=None, use_joystick=False):
     if not cfg['args']['--offline']:
         throttle_controller = PCA9685(cfg['THROTTLE']['THROTTLE_CHANNEL'])
     else:
-        throttle_controller = dk.parts.actuator.MOCK_PCA9685()
+        throttle_controller = dk.parts.actuator.MOCK_PCA9685(cfg['THROTTLE']['THROTTLE_CHANNEL'])
     
     
     throttle = PWMThrottle(controller=throttle_controller,
