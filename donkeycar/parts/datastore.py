@@ -17,6 +17,7 @@ import pandas as pd
 
 from PIL import Image
 from donkeycar import utils
+import logging
 
 
 class OriginalWriter:
@@ -519,6 +520,7 @@ class TubHandler():
         date = datetime.datetime.now().strftime('%y-%m-%d')
         name = '_'.join(['tub',str(tub_num),date])
         tub_path = os.path.join(self.path, name)
+        logging.debug(f"Created new tub {tub_path}")
         return tub_path
 
     def new_tub_writer(self, inputs, types):

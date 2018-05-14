@@ -9,7 +9,7 @@ Created on Sun Jun 25 10:44:24 2017
 import time
 from threading import Thread
 from .memory import Memory
-
+import logging
 
 class Vehicle():
     def __init__(self, mem=None):
@@ -38,17 +38,32 @@ class Vehicle():
         """
 
         p = part
-        print('Adding part {}.'.format(p.__class__.__name__))
         entry={}
         entry['part'] = p
         entry['inputs'] = inputs
         entry['outputs'] = outputs
         entry['run_condition'] = run_condition
-
+        entry['thread']=None
+        
         if threaded:
             t = Thread(target=part.update, args=())
             t.daemon = True
             entry['thread'] = t
+
+        logging.info("Added part {}".format(entry['part'].__class__.__name__))
+
+        logging.debug("\tinputs={}".format(
+             entry['inputs'],
+             ))
+        logging.debug("\toutputs={}".format(
+             entry['outputs'],
+             ))
+        logging.debug("\trun_condition={}".format(
+             entry['run_condition'],
+             ))
+        logging.debug("\tthread={}".format(
+             entry['thread'],
+             ))                
 
         self.parts.append(entry)
 

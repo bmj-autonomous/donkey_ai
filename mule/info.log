@@ -1,3 +1,75 @@
 2018-05-01 08:34:14,875 - root - INFO - Test
 2018-05-01 08:36:05,186 - root - INFO - Test
 2018-05-01 08:40:54,738 - root - INFO - Test
+2018-05-14 17:02:06,051 - root - INFO - Adding part MockCamera.
+2018-05-14 17:02:06,052 - root - INFO - Adding part LocalWebController.
+2018-05-14 17:02:06,053 - root - INFO - Adding part Lambda.
+2018-05-14 17:02:06,134 - root - INFO - Adding part KerasCategorical.
+2018-05-14 17:02:06,135 - root - INFO - Adding part Lambda.
+2018-05-14 17:02:07,136 - root - INFO - Adding part PWMSteering.
+2018-05-14 17:02:07,137 - root - INFO - Adding part PWMThrottle.
+2018-05-14 17:02:07,138 - root - INFO - Adding part TubWriter.
+2018-05-14 17:03:39,204 - root - INFO - Adding part MockCamera {'part': <donkeycar.parts.camera.MockCamera object at 0x7ff1a307a6d8>, 'inputs': [], 'outputs': ['cam/image_array'], 'run_condition': None}.
+2018-05-14 17:03:39,206 - root - INFO - Adding part LocalWebController {'part': <donkeycar.parts.web_controller.web.LocalWebController object at 0x7ff1a3071fd0>, 'inputs': ['cam/image_array'], 'outputs': ['user/angle', 'user/throttle', 'user/mode', 'recording'], 'run_condition': None}.
+2018-05-14 17:03:39,206 - root - INFO - Adding part Lambda {'part': <donkeycar.parts.transform.Lambda object at 0x7ff1a2164e48>, 'inputs': ['user/mode'], 'outputs': ['run_pilot'], 'run_condition': None}.
+2018-05-14 17:03:39,287 - root - INFO - Adding part KerasCategorical {'part': <donkeycar.parts.keras.KerasCategorical object at 0x7ff1a2164e80>, 'inputs': ['cam/image_array'], 'outputs': ['pilot/angle', 'pilot/throttle'], 'run_condition': 'run_pilot'}.
+2018-05-14 17:03:39,287 - root - INFO - Adding part Lambda {'part': <donkeycar.parts.transform.Lambda object at 0x7ff1a1f7bba8>, 'inputs': ['user/mode', 'user/angle', 'user/throttle', 'pilot/angle', 'pilot/throttle'], 'outputs': ['angle', 'throttle'], 'run_condition': None}.
+2018-05-14 17:03:40,288 - root - INFO - Adding part PWMSteering {'part': <donkeycar.parts.actuator.PWMSteering object at 0x7ff1a1f7bbe0>, 'inputs': ['angle'], 'outputs': [], 'run_condition': None}.
+2018-05-14 17:03:40,289 - root - INFO - Adding part PWMThrottle {'part': <donkeycar.parts.actuator.PWMThrottle object at 0x7ff1a1f7bef0>, 'inputs': ['throttle'], 'outputs': [], 'run_condition': None}.
+2018-05-14 17:03:40,290 - root - INFO - Adding part TubWriter {'part': <donkeycar.parts.datastore.TubWriter object at 0x7ff1a1f7bf28>, 'inputs': ['cam/image_array', 'user/angle', 'user/throttle', 'user/mode'], 'outputs': [], 'run_condition': 'recording'}.
+2018-05-14 17:04:59,848 - root - INFO - Adding part MockCamera inputs=[] outputs=['cam/image_array'] run_condition=None.
+2018-05-14 17:04:59,849 - root - INFO - Adding part LocalWebController inputs=['cam/image_array'] outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'] run_condition=None.
+2018-05-14 17:04:59,850 - root - INFO - Adding part Lambda inputs=['user/mode'] outputs=['run_pilot'] run_condition=None.
+2018-05-14 17:04:59,931 - root - INFO - Adding part KerasCategorical inputs=['cam/image_array'] outputs=['pilot/angle', 'pilot/throttle'] run_condition=run_pilot.
+2018-05-14 17:04:59,931 - root - INFO - Adding part Lambda inputs=['user/mode', 'user/angle', 'user/throttle', 'pilot/angle', 'pilot/throttle'] outputs=['angle', 'throttle'] run_condition=None.
+2018-05-14 17:05:00,933 - root - INFO - Adding part PWMSteering inputs=['angle'] outputs=[] run_condition=None.
+2018-05-14 17:05:00,933 - root - INFO - Adding part PWMThrottle inputs=['throttle'] outputs=[] run_condition=None.
+2018-05-14 17:05:00,934 - root - INFO - Adding part TubWriter inputs=['cam/image_array', 'user/angle', 'user/throttle', 'user/mode'] outputs=[] run_condition=recording.
+2018-05-14 17:06:28,553 - root - INFO - Added part MockCamera inputs=[] outputs=['cam/image_array'] run_condition=None, thread=
+2018-05-14 17:06:28,555 - root - INFO - Added part LocalWebController inputs=['cam/image_array'] outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'] run_condition=None, thread=
+2018-05-14 17:06:28,555 - root - INFO - Added part Lambda inputs=['user/mode'] outputs=['run_pilot'] run_condition=None, thread=
+2018-05-14 17:06:28,635 - root - INFO - Added part KerasCategorical inputs=['cam/image_array'] outputs=['pilot/angle', 'pilot/throttle'] run_condition=run_pilot, thread=
+2018-05-14 17:06:28,635 - root - INFO - Added part Lambda inputs=['user/mode', 'user/angle', 'user/throttle', 'pilot/angle', 'pilot/throttle'] outputs=['angle', 'throttle'] run_condition=None, thread=
+2018-05-14 17:06:29,637 - root - INFO - Added part PWMSteering inputs=['angle'] outputs=[] run_condition=None, thread=
+2018-05-14 17:06:29,637 - root - INFO - Added part PWMThrottle inputs=['throttle'] outputs=[] run_condition=None, thread=
+2018-05-14 17:06:29,638 - root - INFO - Added part TubWriter inputs=['cam/image_array', 'user/angle', 'user/throttle', 'user/mode'] outputs=[] run_condition=recording, thread=
+2018-05-14 17:07:35,082 - root - INFO - Added part MockCamera
+2018-05-14 17:07:35,083 - root - INFO - Added part LocalWebController
+2018-05-14 17:07:35,084 - root - INFO - Added part Lambda
+2018-05-14 17:07:35,165 - root - INFO - Added part KerasCategorical
+2018-05-14 17:07:35,166 - root - INFO - Added part Lambda
+2018-05-14 17:07:36,167 - root - INFO - Added part PWMSteering
+2018-05-14 17:07:36,168 - root - INFO - Added part PWMThrottle
+2018-05-14 17:07:36,168 - root - INFO - Added part TubWriter
+2018-05-14 17:07:44,620 - root - INFO - Added part MockCamera
+2018-05-14 17:07:44,622 - root - INFO - Added part LocalWebController
+2018-05-14 17:07:44,622 - root - INFO - Added part Lambda
+2018-05-14 17:07:44,706 - root - INFO - Added part KerasCategorical
+2018-05-14 17:07:44,706 - root - INFO - Added part Lambda
+2018-05-14 17:07:45,708 - root - INFO - Added part PWMSteering
+2018-05-14 17:07:45,708 - root - INFO - Added part PWMThrottle
+2018-05-14 17:07:45,709 - root - INFO - Added part TubWriter
+2018-05-14 17:08:52,686 - root - INFO - Added part MockCamera
+2018-05-14 17:08:52,687 - root - INFO - Added part LocalWebController
+2018-05-14 17:08:52,688 - root - INFO - Added part Lambda
+2018-05-14 17:08:52,772 - root - INFO - Added part KerasCategorical
+2018-05-14 17:08:52,773 - root - INFO - Added part Lambda
+2018-05-14 17:08:53,774 - root - INFO - Added part PWMSteering
+2018-05-14 17:08:53,775 - root - INFO - Added part PWMThrottle
+2018-05-14 17:08:53,777 - root - INFO - Added part TubWriter
+2018-05-14 17:09:05,795 - root - INFO - Added part MockCamera
+2018-05-14 17:09:05,796 - root - INFO - Added part LocalWebController
+2018-05-14 17:09:05,796 - root - INFO - Added part Lambda
+2018-05-14 17:09:05,880 - root - INFO - Added part KerasCategorical
+2018-05-14 17:09:05,880 - root - INFO - Added part Lambda
+2018-05-14 17:09:06,882 - root - INFO - Added part PWMSteering
+2018-05-14 17:09:06,883 - root - INFO - Added part PWMThrottle
+2018-05-14 17:09:06,885 - root - INFO - Added part TubWriter
+2018-05-14 17:09:21,501 - root - INFO - Added part MockCamera
+2018-05-14 17:09:21,503 - root - INFO - Added part LocalWebController
+2018-05-14 17:09:21,503 - root - INFO - Added part Lambda
+2018-05-14 17:09:21,585 - root - INFO - Added part KerasCategorical
+2018-05-14 17:09:21,585 - root - INFO - Added part Lambda
+2018-05-14 17:09:22,587 - root - INFO - Added part PWMSteering
+2018-05-14 17:09:22,588 - root - INFO - Added part PWMThrottle
+2018-05-14 17:09:22,589 - root - INFO - Added part TubWriter

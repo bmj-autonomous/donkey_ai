@@ -7,7 +7,7 @@ are wrapped in a mixer class before being used in the drive loop.
 import time
 
 import donkeycar as dk
-
+import logging
         
 class PCA9685:
     ''' 
@@ -39,6 +39,7 @@ class MOCK_Adafruit_PCA9685():
     
     def set_pwm_freq(self, freq_hz):
         """Set the PWM frequency to the provided value in hertz."""
+        self.frequency = freq_hz
         pass
     
     def set_pwm(self, channel, on, off):

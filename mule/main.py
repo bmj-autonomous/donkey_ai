@@ -155,27 +155,40 @@ def drive(cfg, model_path=None, use_joystick=False):
                   'pilot/angle', 'pilot/throttle'], 
           outputs=['angle', 'throttle'])
 
-
+    # Steering hardware interface class
     if not cfg['args']['--offline']:
-        steering_controller = PCA9685(cfg['STEERING']['STEERING_CHANNEL'])
+        steering_controller = PCA9685(channel=cfg['STEERING']['STEERING_CHANNEL'], frequency=60)
     else:
-        steering_controller = dk.parts.actuator.MOCK_PCA9685(cfg['STEERING']['STEERING_CHANNEL'])
-
+        steering_controller = dk.parts.actuator.MOCK_PCA9685(channel=cfg['STEERING']['STEERING_CHANNEL'], frequency=60)
     
+    logging.debug("Instantiated STEERING controller {} on channel {} at {} Hz".format(
+        type(steering_controller).__name__,
+        steering_controller.channel,
+        steering_controller.pwm.frequency))
+
+    # Wrapper over 
     steering = PWMSteering(controller=steering_controller,
                                     left_pulse=cfg['STEERING']['STEERING_LEFT_PWM'], 
                                     right_pulse=cfg['STEERING']['STEERING_RIGHT_PWM'])
+    logging.debug(f"Instantiated STEERING wrapper over the controller {type(steering).__name__}")
     
+    # Steering hardware interface class
     if not cfg['args']['--offline']:
-        throttle_controller = PCA9685(cfg['THROTTLE']['THROTTLE_CHANNEL'])
+        throttle_controller = PCA9685(channel=cfg['THROTTLE']['THROTTLE_CHANNEL'], frequency=60)
     else:
         throttle_controller = dk.parts.actuator.MOCK_PCA9685(cfg['THROTTLE']['THROTTLE_CHANNEL'])
     
-    
+    logging.debug("Instantiated THROTTLE controller {} on channel {} at {} Hz".format(
+        type(throttle_controller).__name__,
+        throttle_controller.channel,
+        throttle_controller.pwm.frequency))
+        
     throttle = PWMThrottle(controller=throttle_controller,
                                     max_pulse=cfg['THROTTLE']['THROTTLE_FORWARD_PWM'],
                                     zero_pulse=cfg['THROTTLE']['THROTTLE_STOPPED_PWM'], 
                                     min_pulse=cfg['THROTTLE']['THROTTLE_REVERSE_PWM'])
+    logging.debug(f"Instantiated THROTTLE wrapper over the controller {type(throttle).__name__}")
+
     
     V.add(steering, inputs=['angle'])
     V.add(throttle, inputs=['throttle'])
